@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Cara o Cruz</string>
+
+    <string name="btn_tirar">Tirar</string>
+    <string name="btn_parar">Parar</string>
+    <string name="tv_cara">Cara</string>
+    <string name="tv_cruz">Cruz</string>
+    <string name="tv_vacio">...</string>
+    <string name="tv_texto2">Incline a la derecha para tirar la moneda</string>
+    <string name="tv_texto1">Incline a la izquierda para parar</string>
+
+    <string name="tv_agitar">Agitar para tirar</string>
+    <string name="tv_partida">Cantidad de partidas</string>
+    <string name="tv_sonido">Reproducir sonido</string>
+    <string name="tv_info">Info de la app</string>
+
+    <string name="txt_menu">Menu</string>
+    <string name="tv_ganador">Ganador!</string>
+
+    <string name="txt_content_description_1">Spinner</string>
+</resources>
