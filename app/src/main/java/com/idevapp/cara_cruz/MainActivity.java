@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner mSpinner;
 
     //Dialog
-    private Dialog dialogCara, dialogCruz;
+    private Dialog dialogCara, dialogCruz, dialgoAcercaDe;
 
     //Giroscopio
     SensorManager sensorManager;
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                     sheetView.findViewById(R.id.tv_info).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(MainActivity.this, "Funciona", Toast.LENGTH_SHORT).show();
+                            dialogoAcercaDe();
                         }
                     });
 
@@ -138,13 +138,11 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            opcionSpinner = i;
-
                             if (cara == 2 || cruz == 2 || cara == 1 || cruz == 1) {
                                 if (i == 0){
 
                                 }else {
-                                    Toast.makeText(MainActivity.this, "Finalice esta partida primero", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, R.string.txt_toast_1, Toast.LENGTH_LONG).show();
                                 }
 
                             }else {
@@ -411,6 +409,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialogCruz.show();
+    }
+
+    private void dialogoAcercaDe(){
+        dialgoAcercaDe = new Dialog(MainActivity.this);
+        dialgoAcercaDe.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialgoAcercaDe.setContentView(R.layout.dialogo_acerca_de);
+        dialgoAcercaDe.setCancelable(false);
+
+        dialgoAcercaDe.findViewById(R.id.btn_cerrar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialgoAcercaDe.cancel();
+            }
+        });
+        dialgoAcercaDe.show();
     }
 
     //Recetea todas las partidas

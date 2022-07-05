@@ -3,6 +3,7 @@
 
     <string name="btn_tirar">Tirar</string>
     <string name="btn_parar">Parar</string>
+    <string name="btn_cerrar">Cerrar</string>
     <string name="tv_cara">Cara</string>
     <string name="tv_cruz">Cruz</string>
     <string name="tv_vacio">...</string>
@@ -12,10 +13,17 @@
     <string name="tv_agitar">Agitar para tirar</string>
     <string name="tv_partida">Cantidad de partidas</string>
     <string name="tv_sonido">Reproducir sonido</string>
-    <string name="tv_info">Info de la app</string>
+    <string name="tv_info">Info. de la app</string>
 
     <string name="txt_menu">Menu</string>
     <string name="tv_ganador">Ganador!</string>
 
     <string name="txt_content_description_1">Spinner</string>
+
+    <string name="btn_ok">Aceptar</string>
+
+    <string name="txt_toast_1">Finalice esta partida</string>
+    <string name="txt_vercion">Versión 1.0</string>
+
+    <string name="txt_acerca_de">El clásico juego de cara o cruz ahora en tu smartphone para que juegues con tus amigos</string>
 </resources>
