@@ -13,12 +13,19 @@
     <string name="tv_agitar">Agitar para tirar</string>
     <string name="tv_partida">Cantidad de partidas</string>
     <string name="tv_sonido">Reproducir sonido</string>
-    <string name="tv_info">Info. de la app</string>
+    <string name="tv_info">Info de la app</string>
 
     <string name="txt_menu">Menu</string>
     <string name="tv_ganador">Ganador!</string>
 
     <string name="txt_content_description_1">Spinner</string>
+    <string name="txt_content_description_2">ImageView moneda</string>
+    <string name="txt_content_description_3">ImageView puntiacion 1</string>
+    <string name="txt_content_description_4">ImageView puntiacion 2</string>
+    <string name="txt_content_description_5">ImageView puntiacion 3</string>
+    <string name="txt_content_description_6">ImageView puntiacion 4</string>
+    <string name="txt_content_description_7">ImageView puntiacion 5</string>
+    <string name="txt_content_description_8">ImageView puntiacion 6</string>
 
     <string name="btn_ok">Aceptar</string>
 

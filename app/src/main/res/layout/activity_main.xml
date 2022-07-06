@@ -35,13 +35,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:text="@string/btn_tirar"
+        android:textColor="#000000"
         android:visibility="visible"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/iv_moneda"
@@ -51,19 +52,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@drawable/cara" />
+        app:srcCompat="@drawable/cara"
+        android:contentDescription="@string/txt_content_description_2"/>
 
     <com.google.android.material.card.MaterialCardView
         style="@style/Widget.Material3.CardView.Outlined"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        app:cardCornerRadius="20dp"
         android:backgroundTint="@color/purple_700"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/purple_200"
         app:strokeWidth="3dp">
 
@@ -98,7 +98,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_6"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/iv_5"
@@ -106,7 +108,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_7"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/iv_6"
@@ -114,7 +118,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_8"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
             </LinearLayout>
         </LinearLayout>
 
@@ -126,13 +132,11 @@
         style="@style/Widget.Material3.CardView.Outlined"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        app:cardCornerRadius="20dp"
         android:backgroundTint="@color/purple_700"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/purple_200"
         app:strokeWidth="3dp">
 
@@ -167,7 +171,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_3"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/iv_2"
@@ -175,7 +181,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_4"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/iv_3"
@@ -183,7 +191,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/punto_linea" />
+                    android:contentDescription="@string/txt_content_description_5"
+                    app:srcCompat="@drawable/punto_linea"
+                    tools:ignore="ImageContrastCheck" />
             </LinearLayout>
         </LinearLayout>
 
@@ -197,7 +207,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline

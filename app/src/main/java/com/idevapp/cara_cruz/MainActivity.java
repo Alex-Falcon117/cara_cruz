@@ -1,26 +1,18 @@
 package com.idevapp.cara_cruz;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -28,12 +20,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Random;
-import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mtv;
     private Button mbtn;
     private ImageView miv, miv1, miv2, miv3, miv4, miv5, miv6;
-    private MaterialToolbar mToolBar;
     private BottomSheetDialog mBSheetDialog;
     private SwitchCompat mSwitch_sonido;
     private Spinner mSpinner;
@@ -50,20 +38,17 @@ public class MainActivity extends AppCompatActivity {
     private Dialog dialogCara, dialogCruz, dialgoAcercaDe;
 
     //Giroscopio
-    SensorManager sensorManager;
-    Sensor sensor;
-    SensorEventListener sensorEventListener;
+    //SensorManager sensorManager;
+    //Sensor sensor;
+    //SensorEventListener sensorEventListener;
 
 
-    String moneda[]={"CARA","CRUZ"};
+    String[] moneda ={"CARA","CRUZ"};
     Random random = new Random();
 
     int moneda_selec;
-    int opcionSpinner;
     byte cara = 0;
     byte cruz = 0;
-    boolean valor = false;
-    boolean valor2 = false;
     boolean estadoSW_sonido = false;
     boolean uno = false;
     boolean dos = false;
@@ -83,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //-------------------------------------------------------------------------------------
         //Referencia a las vistas
-        mToolBar=findViewById(R.id.toolAppBar);
+        MaterialToolbar mToolBar = findViewById(R.id.toolAppBar);
 
         mbtn=findViewById(R.id.btn_tirar);
         miv=findViewById(R.id.iv_moneda);
@@ -96,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         miv5=findViewById(R.id.iv_5);
         miv6=findViewById(R.id.iv_6);
 
-        arrayPartidas = new ArrayAdapter<String>(MainActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, partidas);
+        arrayPartidas = new ArrayAdapter<>(MainActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, partidas);
 
         //Sensores
        // sensorManager =(SensorManager) getSystemService(SENSOR_SERVICE);
@@ -104,110 +89,91 @@ public class MainActivity extends AppCompatActivity {
        // sensores();
 
         //Evento botonTirar
-        mbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tarea();
-            }
-        });
+        mbtn.setOnClickListener(view -> tarea());
 
         //Mebu / ButtonSheet
-        mToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        mToolBar.setOnMenuItemClickListener(item -> {
 
-                if (item.getItemId() == R.id.menu){
-                    mBSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
-                    View sheetView = LayoutInflater.from(MainActivity.this).inflate(R.layout.bs_menu, null);
+            if (item.getItemId() == R.id.menu){
+                mBSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
+                @SuppressLint("InflateParams") View sheetView = LayoutInflater.from(MainActivity.this).inflate(R.layout.bs_menu, null);
 
 
-                    sheetView.findViewById(R.id.tv_info).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialogoAcercaDe();
-                        }
-                    });
+                sheetView.findViewById(R.id.tv_info).setOnClickListener(view -> dialogoAcercaDe());
 
-                    mSwitch_sonido=sheetView.findViewById(R.id.sw_sonido);
-                    mSpinner= sheetView.findViewById(R.id.spinner);
+                mSwitch_sonido=sheetView.findViewById(R.id.sw_sonido);
+                mSpinner= sheetView.findViewById(R.id.spinner);
 
-                    mSpinner.setAdapter(arrayPartidas);
+                mSpinner.setAdapter(arrayPartidas);
 
-                 // Spinner
-                    mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+             // Spinner
+                mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            if (cara == 2 || cruz == 2 || cara == 1 || cruz == 1) {
-                                if (i == 0){
-
-                                }else {
-                                    Toast.makeText(MainActivity.this, R.string.txt_toast_1, Toast.LENGTH_LONG).show();
-                                }
-
+                        if (cara == 2 || cruz == 2 || cara == 1 || cruz == 1) {
+                            if (i == 0){
                             }else {
-                            switch (i) {
-                                case 0:
-                                    uno = false;
-                                    dos = false;
-                                    tres = true;
-
-                                    miv2.setVisibility(View.VISIBLE);
-                                    miv3.setVisibility(View.VISIBLE);
-
-                                    miv5.setVisibility(View.VISIBLE);
-                                    miv6.setVisibility(View.VISIBLE);
-                                    break;
-                                case 1:
-                                    uno = false;
-                                    dos = true;
-                                    tres = false;
-                                    miv3.setVisibility(View.INVISIBLE);
-                                    miv6.setVisibility(View.INVISIBLE);
-                                    break;
-                                default:
-                                    uno = true;
-                                    dos = false;
-                                    tres = false;
-                                    miv2.setVisibility(View.INVISIBLE);
-                                    miv3.setVisibility(View.INVISIBLE);
-
-                                    miv5.setVisibility(View.INVISIBLE);
-                                    miv6.setVisibility(View.INVISIBLE);
-                                    break;
+                                Toast.makeText(MainActivity.this, R.string.txt_toast_1, Toast.LENGTH_LONG).show();
                             }
-                        }
-                        }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }else {
+                        switch (i) {
+                            case 0:
+                                uno = false;
+                                dos = false;
+                                tres = true;
 
+                                miv2.setVisibility(View.VISIBLE);
+                                miv3.setVisibility(View.VISIBLE);
+
+                                miv5.setVisibility(View.VISIBLE);
+                                miv6.setVisibility(View.VISIBLE);
+                                break;
+                            case 1:
+                                uno = false;
+                                dos = true;
+                                tres = false;
+                                miv5.setVisibility(View.VISIBLE);
+                                miv2.setVisibility(View.VISIBLE);
+                                miv3.setVisibility(View.INVISIBLE);
+                                miv6.setVisibility(View.INVISIBLE);
+                                break;
+                            default:
+                                uno = true;
+                                dos = false;
+                                tres = false;
+                                miv2.setVisibility(View.INVISIBLE);
+                                miv3.setVisibility(View.INVISIBLE);
+
+                                miv5.setVisibility(View.INVISIBLE);
+                                miv6.setVisibility(View.INVISIBLE);
+                                break;
                         }
-                    });
-
-
-                    mSwitch_sonido.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if(mSwitch_sonido.isChecked()){
-                                //DO
-                                estadoSW_sonido=true;
-                            }else {
-                                //DO
-                                estadoSW_sonido=false;
-                            }
-                        }
-                    });
-                    if (mSwitch_sonido.isChecked()==false && estadoSW_sonido==true){
-                        mSwitch_sonido.setChecked(true);
+                    }
                     }
 
-                    mBSheetDialog.setContentView(sheetView);
-                    mBSheetDialog.show();
-                    return true;
-                }else{
-                    return false;
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
+
+                mSwitch_sonido.setOnClickListener(view -> {
+                    //DO
+                    //DO
+                    estadoSW_sonido= mSwitch_sonido.isChecked();
+                });
+                if (!mSwitch_sonido.isChecked() && estadoSW_sonido) {
+                    mSwitch_sonido.setChecked(true);
                 }
+
+                mBSheetDialog.setContentView(sheetView);
+                mBSheetDialog.show();
+                return true;
+            }else{
+                return false;
             }
         });
     }//Fin onCreate---------------------------------------------------------------------------------
@@ -215,18 +181,18 @@ public class MainActivity extends AppCompatActivity {
     private void pararMoneda() {
         moneda_selec=random.nextInt(2);
         mbtn.setVisibility(View.VISIBLE);
-        if (tres == true) {
+        if (tres) {
             partidaTres(moneda_selec);
-        }else if(dos == true){
+        }else if(dos){
             partidaDos(moneda_selec);
-        }else if(uno == true){
+        }else if(uno){
             partidaUno(moneda_selec);
         }
 
     }
 
     //Utiliza el giroscopio
-    private void sensores() {
+    /*private void sensores() {
 
         if (sensor==null){
             Toast.makeText(this, "No se puede usar la funcion de inclinacion", Toast.LENGTH_LONG).show();
@@ -236,12 +202,12 @@ public class MainActivity extends AppCompatActivity {
                 public void onSensorChanged(SensorEvent sensorEvent) {
                     float x = sensorEvent.values[0];
 
-                    if(x<-10 && valor == false){
+                    if(x<-10 && !valor){
                         valor = true;
-                    } else if(x>10 && valor2==false){
+                    } else if(x>10 && !valor2){
                         valor2=true;
 
-                    }else if (valor==true && valor2==true){
+                    }else if (valor && valor2){
                         valor=false;
                         valor2=false;
                         tarea();
@@ -255,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
         }
-    }
+    }*/
 
     private void tarea() {
         anim();
@@ -278,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         mtv.setText("...");
         Glide.with(getApplicationContext()).load(R.drawable.moneda_anim).into(miv);
 
-        if (estadoSW_sonido==true){
+        if (estadoSW_sonido){
             sonido();
         }
 
@@ -359,20 +325,17 @@ public class MainActivity extends AppCompatActivity {
             miv.setImageResource(R.drawable.cruz);
             cruz ++;
 
-            switch (cruz){
-                case 1:
-                    miv1.setImageResource(R.drawable.punto_relleno);
-                    dialogoCruz();
-                    break;
+            if (cruz == 1) {
+                miv1.setImageResource(R.drawable.punto_relleno);
+                dialogoCruz();
             }
         }else {
             miv.setImageResource(R.drawable.cara);
             mtv.setText(moneda[i]);
             cara ++;
-            switch (cara){
-                case 1: miv4.setImageResource(R.drawable.punto_relleno);
-                    dialogoCara();
-                    break;
+            if (cara == 1) {
+                miv4.setImageResource(R.drawable.punto_relleno);
+                dialogoCara();
             }
         }
     }
@@ -385,12 +348,9 @@ public class MainActivity extends AppCompatActivity {
         dialogCara.setContentView(R.layout.dialog_cara);
         dialogCara.setCancelable(false);
 
-        dialogCara.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                receterarTodo();
-                dialogCara.cancel();
-            }
+        dialogCara.findViewById(R.id.btn_ok).setOnClickListener(view -> {
+            receterarTodo();
+            dialogCara.cancel();
         });
         dialogCara.show();
     }
@@ -401,12 +361,9 @@ public class MainActivity extends AppCompatActivity {
         dialogCruz.setContentView(R.layout.dialog_cruz);
         dialogCruz.setCancelable(false);
 
-        dialogCruz.findViewById(R.id.btn_ok2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                receterarTodo();
-                dialogCruz.cancel();
-            }
+        dialogCruz.findViewById(R.id.btn_ok2).setOnClickListener(view -> {
+            receterarTodo();
+            dialogCruz.cancel();
         });
         dialogCruz.show();
     }
@@ -417,12 +374,7 @@ public class MainActivity extends AppCompatActivity {
         dialgoAcercaDe.setContentView(R.layout.dialogo_acerca_de);
         dialgoAcercaDe.setCancelable(false);
 
-        dialgoAcercaDe.findViewById(R.id.btn_cerrar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialgoAcercaDe.cancel();
-            }
-        });
+        dialgoAcercaDe.findViewById(R.id.btn_cerrar).setOnClickListener(view -> dialgoAcercaDe.cancel());
         dialgoAcercaDe.show();
     }
 
@@ -440,12 +392,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Sensores activacion
-    public void iniciarSensor(){
+   /* public void iniciarSensor(){
         sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
     public void pararSensor(){
         sensorManager.unregisterListener(sensorEventListener);
-    }
+    }*/
 
 
     @Override
